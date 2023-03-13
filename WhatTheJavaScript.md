@@ -1,13 +1,10 @@
-
 # What The JavaScript
-## Introduction
 
-
-### Primitives
+## Primitives
 Simplest primitive is a primitive boolean.
 Simple 0 or 1s.
 
-#### Boolean
+### Boolean
 
 ```javascript
 true    // true
@@ -24,7 +21,6 @@ new Boolean('123')          // true
 new Boolean({})             // true
 new Boolean([])             // true
 new Boolean(function(){})   // true
-new Boolean(undefined)      // false
 new Boolean(undefined)      // false
 ```
 
@@ -45,7 +41,7 @@ const instance = new test();
 instance instanceof test    // true
 ```
 
-##### Conclusion
+#### Conclusion
 Testing for primitive types should always be done using `typeof`, not `instanceof` 
 ```javascript
  typeof test == 'function' // true
@@ -61,7 +57,7 @@ Boolean.prototype.wtf = function(obj) {
 }
 ```
 
-#### Type Coercion
+### Type Coercion
 Type coercion is the automatic or implicit conversion of values from one data type to another.
 
 ```javascript
@@ -97,14 +93,9 @@ One would think in a boolean context, everything gets converted to truthy or fal
 ```
 It's simply auto-converting these arrays and object to strings
 
-#### Numbers
+### Numbers
 
-```javascript
-123     // 123
-false   // false
-```
 +value converts it to a number.
-
 and isNaN is odd.
 ```javascript
 +'123'              // 123
@@ -223,7 +214,7 @@ To avoid these issues, use libraries that support arbitrary-precision arithmetic
 such as `BigInt` in newer versions of JavaScript, or use string representations of large numbers instead.
 
 
-#### String
+## String
 
 ```javascript
 (69).toString()             // '69'
@@ -249,7 +240,7 @@ Number(""); // -> 0
 --"";   // SyntaxError, space is important
 ```
 
-####  Regex
+## Regex
 Regex with the global flag is stateful. When the regex is global, if you call a method on the same regex object, 
 it will start from the index past the end of the last match. When no more matches are found, the index is reset to 0 automatically.
 ```javascript
@@ -264,7 +255,7 @@ str.match(reg)  // ["ab"]
 Don't do REGEX.
 Match regex on base64 image data which is 15MB of characters. Just dont.
 
-#### Arrays
+## Arrays
 ```javascript
 [] + []                 // ''
 [].toString();          // -> ""
@@ -294,7 +285,7 @@ test.length            // 3
 Deleting in arrays is likely not what you want.
 
 
-#### Objects
+## Objects
 ```javascript
 [] + {} 
 {} + []
@@ -306,7 +297,7 @@ console.log(asdf[6]);
 console.log(asdf['6']);
 ```
 
-#### JSON parsing
+## JSON parsing
 ```javascript
 JSON.parse("1")
 JSON.parse("-0")
@@ -323,7 +314,7 @@ JSON.parse("9007199254740995") // 9007199254740996
 ```
 
 
-#### Weird Stuff
+## Weird Stuff
 key value swap
 ```javascript
 const map = new Map();
