@@ -69,6 +69,13 @@ Type coercion is the automatic or implicit conversion of values from one data ty
 123 === '123'       // false
 123 === +'123'      // true
 123 ===+     '123'  // true
+
+null === 0          // false
+null == 0           // false
+null > 0            // false
+null < 0            // false
+null >= 0           // true
+null <= 0           // true
 ```
 
 Truthy and falsy values are values that are considered true or false when encountered in a Boolean context. 
@@ -98,7 +105,7 @@ false   // false
 ```
 +value converts it to a number.
 
-and isNan is odd.
+and isNaN is odd.
 ```javascript
 +'123'              // 123
 +123                // 123
@@ -116,6 +123,11 @@ isNaN(undefined)    // true
 isNaN(null)         // false
 isNaN(NaN)          // true
 typeof NaN          // number
+
+const res = NaN;
+const a = [res];
+a.includes(res); // true
+a.indexOf(res); // false
 ```
 The ECMAScript Language Specification explains NaN as a number value that is a IEEE 754 “Not-a-Number” value. It might seem strange, but this is a common computer science principle.
 
@@ -141,7 +153,7 @@ mamamia='',lalal=123                // 123
 
 Now some back to school math
 ```javascript
-0420 - 069          // 203    
+0420 - 069          // 203   : 0 --> base 8 0x --> hex
 null + 0            // 0
 1 + 2 + "3"         // '33'
 1 + 2 + +"3"        // '33'
@@ -223,7 +235,7 @@ such as `BigInt` in newer versions of JavaScript, or use string representations 
 
 string.replace
 string.replaceAll // dont fall for it
-const string = 'e851e2fa-4f00-4609-9dd2-9b3794c59619'
+const uuid = 'e851e2fa-4f00-4609-9dd2-9b3794c59619'
 console.log(string.replace('-', ''))    // e851e2fa4f00-4609-9dd2-9b3794c59619
 
 "" - - "" // These two empty strings are both converted to 0.
@@ -232,9 +244,126 @@ Number(""); // -> 0
 0 - - 0; // -> 0
 // The expression might become a bit clearer if I write it like this:
 
-+"" - -""   // 0
-+0 - -0     // 0
 
 - -"";  // 0
 --"";   // SyntaxError, space is important
+```
+
+####  Regex
+Regex with the global flag is stateful. When the regex is global, if you call a method on the same regex object, 
+it will start from the index past the end of the last match. When no more matches are found, the index is reset to 0 automatically.
+```javascript
+reg = /ab/g
+str = "abc"
+reg.test(str)   // true
+reg.test(str)   // false
+
+str.match(reg)  // ["ab"]
+```
+##### Conclusion
+Don't do REGEX.
+Match regex on base64 image data which is 15MB of characters. Just dont.
+
+#### Arrays
+```javascript
+[] + []                 // ''
+[].toString();          // -> ""
+new String() + [1,2,3]  // '1,2,3'
++[1].toString()         // 1
++[1,2].toString()       // NaN
+[1] + [2]               // '12'
+[1,2] + [3,4]           // '1,23,4'
+[...[1,2], ...[3,4]]    // [1,2,3,4]
+```
+
+```javascript
+[] + [] === [,] + [,];  // -> true
+const arr = Array(15)   // [ <15 empty items> ]
+arr.length              // 15
+arr.join('wat')         // 'watwatwatwatwatwatwatwatwatwatwatwatwatwat'
+arr.join('wat' + 1)     // 'wat1wat1wat1wat1wat1wat1wat1wat1wat1wat1wat1wat1wat1wat1'
+arr.join('wat' - 1)     // 'NaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaN'
+arr.join('wat' - 1) + ' Batman!' // 'NaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaN Batman!'
+```
+
+```javascript
+const test = [1,2,3];
+delete test[1];
+test.length            // 3
+```
+Deleting in arrays is likely not what you want.
+
+
+#### Objects
+```javascript
+[] + {} 
+{} + []
+{} + {}
+[] + []
+
+const asdf = { 6.0: '6Komma0', test: 'test' };
+console.log(asdf[6]);
+console.log(asdf['6']);
+```
+
+#### JSON parsing
+```javascript
+JSON.parse("1")
+JSON.parse("-0")
+JSON.parse("10e5")
+JSON.parse("0x1")
+JSON.stringify(NaN) // null
+JSON.stringify(Infinity) // null
+JSON.stringify(undefined) // undefined
+JSON.parse(JSON.stringify(undefined)) // error
+JSON.stringify({foo: undefined}) // {}
+JSON.stringify([]) // ‘[]’
+JSON.stringify([undefined]) // ‘[null]’
+JSON.parse("9007199254740995") // 9007199254740996
+```
+
+
+#### Weird Stuff
+key value swap
+```javascript
+const map = new Map();
+for(const [k,v] of map){
+    console.log(k,v);
+}
+
+map.forEach((v,k) => {
+    console.log(k,v);
+});
+```
+Undefined is a defined value
+```javascript
+let test = undefined;
+if (test == undefined){
+    console.log('test is undefined');
+}
+if (asdf == undefined) {
+    console.log('asdf is undefined');
+}
+```
+
+```javascript
+'W'+
+'h'+
+(![]+[])[+!![]]+
+(!![]+[])[+[]]+
+(+{}+{})[+!![]+[+[]]]+
+(!![]+[])[+[]]+
+'h'+
+([]+{})[+!![]+[+!![]]]+
+(+{}+{})[+!![]+[+[]]]+
+([]+{})[+!![]+[+[]]]+
+(![]+[])[+!![]]+
+'v'+
+(![]+[])[+!![]]+
+(![]+[])[!+[]+!![]+!![]]+
+(![]+{})[+!![]+[+[]]]+
+(!![]+[])[+!![]]+
+(![]+[]+[][[]])[+!![]+[+[]]]+
+'p'+
+(!![]+[])[+[]]
 ```
