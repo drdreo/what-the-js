@@ -1,5 +1,5 @@
 # What The JavaScript
-
+JavaScript. The language that everyone loves to hate. Sure, it's powerful and ubiquitous, but it's also one of the most unpredictable and downright weird programming languages out there. From unexpected behavior with arrays and objects, to the infamous "NaN" value and the "truthy/falsy" conundrum, JavaScript is full of quirks and edge cases that can make even experienced developers scratch their heads. We will marvel at the strange and sometimes hilarious things that can happen when you don't know what you're doing. We'll look at real-world examples of JavaScript code gone wrong, and laugh at the sheer absurdity of it all.
 ## Primitives
 Simplest primitive is a primitive boolean.
 Simple 0 or 1s.
