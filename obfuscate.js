@@ -48,6 +48,5 @@ fs.writeFile('./output.js', code, err => {
     if (err) {
         console.error(err);
     }
-    // file written successfully
     console.log('Written successfully!');
 });

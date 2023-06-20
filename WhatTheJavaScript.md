@@ -13,15 +13,15 @@ false   // false
 
 Creating booleans is as simple as:
 ```javascript
-new Boolean()               // false
-new Boolean(0)              // false
-new Boolean(1)              // true
-new Boolean('')             // false
-new Boolean('123')          // true
-new Boolean({})             // true
-new Boolean([])             // true
-new Boolean(function(){})   // true
-new Boolean(undefined)      // false
+Boolean()               // false
+Boolean(0)              // false
+Boolean(1)              // true
+Boolean('')             // false
+Boolean('123')          // true
+Boolean({})             // true
+Boolean([])             // true
+Boolean(function(){})   // true
+Boolean(undefined)      // false
 ```
 
 ```javascript
@@ -37,8 +37,8 @@ This means we can create new instances of functions.
 const test = function(){console.log(123)}
 test()                      // 123
 new test()                  // 123 & test {}
-const instance = new test();
-instance instanceof test    // true
+const t = new test();
+t instanceof test           // true
 ```
 
 #### Conclusion
@@ -52,9 +52,10 @@ primitives in appropriate object wrappers when they are used like object referen
 true.valueOf()  // true
 true.toString() // 'true'
 
-Boolean.prototype.wtf = function(obj) {
+Boolean.prototype.wtf = function() {
     console.log('wtf is this monkey doing');
 }
+true.wtf()
 ```
 
 ### Type Coercion
@@ -62,6 +63,7 @@ Type coercion is the automatic or implicit conversion of values from one data ty
 
 ```javascript
 123 == '123'        // true
+123 == '00000123'   // true
 123 === '123'       // false
 123 === +'123'      // true
 123 ===+     '123'  // true
@@ -117,8 +119,8 @@ typeof NaN          // number
 
 const res = NaN;
 const a = [res];
-a.includes(res); // true
-a.indexOf(res); // false
+a.includes(res);    // true
+a.indexOf(res);     // -1
 ```
 The ECMAScript Language Specification explains NaN as a number value that is a IEEE 754 “Not-a-Number” value. It might seem strange, but this is a common computer science principle.
 
@@ -147,7 +149,7 @@ Now some back to school math
 0420 - 069          // 203   : 0 --> base 8 0x --> hex
 null + 0            // 0
 1 + 2 + "3"         // '33'
-1 + 2 + +"3"        // '33'
+1 + 2 + +"3"        // 6
 0/0                 // NaN - according to google, its undefined
 1/0                 // Infinity
 -1/0                // -Infinity
@@ -158,9 +160,7 @@ null + 0            // 0
 some random number related stuff
 ```javascript
 3 > 2 > 1   // false
-3 + "3"     // '33'
-3 - "3"     // 0
-"" - 1      // -1
+true > 1    // false
 ```
 
 More real-world scenarios:
@@ -230,13 +230,8 @@ const uuid = 'e851e2fa-4f00-4609-9dd2-9b3794c59619'
 console.log(string.replace('-', ''))    // e851e2fa4f00-4609-9dd2-9b3794c59619
 
 "" - - "" // These two empty strings are both converted to 0.
-
-Number(""); // -> 0
 0 - - 0; // -> 0
-// The expression might become a bit clearer if I write it like this:
 
-
-- -"";  // 0
 --"";   // SyntaxError, space is important
 ```
 
@@ -279,6 +274,7 @@ arr.join('wat' - 1) + ' Batman!' // 'NaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaN 
 
 ```javascript
 const test = [1,2,3];
+test.length            // 3
 delete test[1];
 test.length            // 3
 ```
@@ -329,12 +325,10 @@ map.forEach((v,k) => {
 Undefined is a defined value
 ```javascript
 let test = undefined;
-if (test == undefined){
-    console.log('test is undefined');
-}
-if (asdf == undefined) {
-    console.log('asdf is undefined');
-}
+test == undefined   // true
+asdf == undefined   // ReferenceError
+```
+```javascript
 ```
 
 ```javascript
