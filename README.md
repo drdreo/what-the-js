@@ -295,23 +295,23 @@ console.log(asdf['6']);
 
 ## JSON parsing
 ```javascript
-JSON.parse("1")
-JSON.parse("-0")
-JSON.parse("10e5")
-JSON.parse("0x1")
-JSON.stringify(NaN) // null
-JSON.stringify(Infinity) // null
-JSON.stringify(undefined) // undefined
+JSON.parse("1")                       // 1
+JSON.parse("-0")                      // -0
+JSON.parse("10e5")                    // 1000000
+JSON.parse("0x1")                     // SyntaxError
+JSON.stringify(NaN)                   // null
+JSON.stringify(Infinity)              // null
+JSON.stringify(undefined)             // undefined
 JSON.parse(JSON.stringify(undefined)) // error
-JSON.stringify({foo: undefined}) // {}
-JSON.stringify([]) // ‘[]’
-JSON.stringify([undefined]) // ‘[null]’
-JSON.parse("9007199254740995") // 9007199254740996
+JSON.stringify({foo: undefined})      // {}
+JSON.stringify([])                    // ‘[]’
+JSON.stringify([undefined])           // ‘[null]’
+JSON.parse("9007199254740995")        // 9007199254740996
 ```
 
 
 ## Weird Stuff
-key value swap
+Key & value are swapped between for..of and map
 ```javascript
 const map = new Map();
 for(const [k,v] of map){
@@ -331,6 +331,7 @@ asdf == undefined   // ReferenceError
 ```javascript
 ```
 
+And then the fun stuff. Obfuscation via array / object additions.
 ```javascript
 'W'+
 'h'+
