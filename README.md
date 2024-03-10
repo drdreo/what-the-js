@@ -280,6 +280,10 @@ test.length            // 3
 ```
 Deleting in arrays is likely not what you want.
 
+```javascript
+[1,2,3,4][1,3,2]         // 3
+```
+The index expression always uses the last expression, [1,3,2] --> [1,2,3,4][2]
 
 ## Objects
 ```javascript
