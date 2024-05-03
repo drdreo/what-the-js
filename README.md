@@ -223,6 +223,7 @@ such as `BigInt` in newer versions of JavaScript, or use string representations 
 
 'b' + 'a' + 'a' + 'a'       // 'baa'
 'b' + 'a' + + 'a' + 'a'     // 'baNaNa'
+'😎'.length                // 2
 
 string.replace
 string.replaceAll // dont fall for it
