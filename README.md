@@ -315,11 +315,6 @@ JSON.parse("9007199254740995")        // 9007199254740996
 JSON.stringify({options: {"": "", "1": "1"}}) // reordered keys '{"options":{"1":"1","":""}}'
 ```
 
-## JSON stringify
-```javascript
-JSON.parse("1")                       // 1
-```
-
 ## Weird Stuff
 Key & value are swapped between for..of and map
 ```javascript
