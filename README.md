@@ -323,7 +323,7 @@ JavaScript's Date constructor has some peculiar behavior when dealing with numer
 console.log( new Date( "49" ) );
 // Result: Date Fri Jan 01 2049 00:00:00 GMT-0500 (Eastern Standard Time)
 
-// A numeric string between 50 and 99 is assumed to be in the 1900s:
+// A numeric string between 33 and 99 is assumed to be in the 1900s:
 console.log( new Date( "99" ) );
 // Result: Date Fri Jan 01 1999 00:00:00 GMT-0500 (Eastern Standard Time)
 
