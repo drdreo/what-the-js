@@ -315,6 +315,23 @@ JSON.parse("9007199254740995")        // 9007199254740996
 JSON.stringify({options: {"": "", "1": "1"}}) // reordered keys '{"options":{"1":"1","":""}}'
 ```
 
+## Date
+JavaScript's Date constructor has some peculiar behavior when dealing with numeric strings.
+
+```javascript
+// A numeric string between 32 and 49 is assumed to be in the 2000s:
+console.log( new Date( "49" ) );
+// Result: Date Fri Jan 01 2049 00:00:00 GMT-0500 (Eastern Standard Time)
+
+// A numeric string between 50 and 99 is assumed to be in the 1900s:
+console.log( new Date( "99" ) );
+// Result: Date Fri Jan 01 1999 00:00:00 GMT-0500 (Eastern Standard Time)
+
+// ...But 100 and up start from year zero:
+console.log( new Date( "100" ) );
+// Result: Date Fri Jan 01 0100 00:00:00 GMT-0456 (Eastern Standard Time)
+```
+
 ## Weird Stuff
 Key & value are swapped between for..of and map
 ```javascript
